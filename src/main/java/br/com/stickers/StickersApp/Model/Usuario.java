@@ -1,4 +1,6 @@
-package br.com.stickers.StickersApp.Entity;
+package br.com.stickers.StickersApp.Model;
+
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,4 +25,9 @@ public class Usuario {
 	private String email;
 	
 	private String pais;
+	
+	private ArrayList<AndamentoUsuario> listAndamentoUsuario;
+	
+	private ArrayList<Multimidia> listFavoritos;
+	
 }

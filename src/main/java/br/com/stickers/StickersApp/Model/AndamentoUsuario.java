@@ -1,4 +1,4 @@
-package br.com.stickers.StickersApp.Entity;
+package br.com.stickers.StickersApp.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,9 +16,10 @@ public class AndamentoUsuario {
 	@GeneratedValue
 	private Long andamentoUsuario_id;
 
-	private Producao producao;
+	private Multimidia multimidia;
 	
 	private Integer epAssistidos;
 
 	private Boolean stickerOK;
+
 }

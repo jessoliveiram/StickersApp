@@ -1,4 +1,4 @@
-package br.com.stickers.StickersApp.Entity;
+package br.com.stickers.StickersApp.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,11 +11,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class TipoProducao {
+public class GeneroProducao {
 	
 	@Id
 	@GeneratedValue
-	private Long tipoProducao_id;
+	private Long generoProducao_id;
 	
 	private String nome;
 	

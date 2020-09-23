@@ -1,4 +1,4 @@
-package br.com.stickers.StickersApp.Entity;
+package br.com.stickers.StickersApp.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,17 +10,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Producao {
+public class Multimidia {
 
 	@Id
 	@GeneratedValue
-	private Long producao_id;
+	private Long multimidia_id;
 	
 	private String nome;
 	
-	private TipoProducao tipoProducao;
+	private TipoMultimidia tipoMultimidia;
 	
-	private GeneroProducao generoProducao;
+	private GeneroProducao generoMultimidia;
 	
 	private Integer epTotal;
 	

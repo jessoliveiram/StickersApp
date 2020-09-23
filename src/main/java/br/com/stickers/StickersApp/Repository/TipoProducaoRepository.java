@@ -3,9 +3,9 @@ package br.com.stickers.StickersApp.Repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.stickers.StickersApp.Entity.TipoProducao;
+import br.com.stickers.StickersApp.Model.TipoMultimidia;
 
 @Repository
-public interface TipoProducaoRepository extends CrudRepository<Long, TipoProducao> {
+public interface TipoProducaoRepository extends CrudRepository<Long, TipoMultimidia> {
 
 }
