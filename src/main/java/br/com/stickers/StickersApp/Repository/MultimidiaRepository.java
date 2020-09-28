@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import br.com.stickers.StickersApp.Model.Multimidia;
 
 @Repository
-public interface ProducaoRepository extends CrudRepository<Long, Multimidia> {
-
+public interface MultimidiaRepository extends CrudRepository<Long, Multimidia> {
+	
+	public Multimidia findMultimidiaById(Long id);
+	
 }
