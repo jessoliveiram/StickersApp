@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import br.com.stickers.StickersApp.Model.AndamentoUsuario;
 
 @Repository
-public interface AndamentoUsuarioRepository extends CrudRepository<Long, AndamentoUsuario> {
+public interface AndamentoUsuarioRepository extends CrudRepository<AndamentoUsuario, Long> {
+	
+	public AndamentoUsuario findAndamentoUsuarioById(Long id);
 
 }
