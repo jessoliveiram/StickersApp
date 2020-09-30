@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.stickers.StickersApp.Model.Usuario;
 
 @Repository
-public interface UsuarioRepository extends CrudRepository<Long, Usuario> {
+public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 
 }

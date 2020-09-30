@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.stickers.StickersApp.Model.TipoMultimidia;
 
 @Repository
-public interface TipoProducaoRepository extends CrudRepository<Long, TipoMultimidia> {
+public interface TipoMultimidiaRepository extends CrudRepository<TipoMultimidia, Long> {
 
 }

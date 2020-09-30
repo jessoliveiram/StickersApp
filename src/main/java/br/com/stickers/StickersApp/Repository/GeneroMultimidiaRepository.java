@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.stickers.StickersApp.Model.GeneroProducao;
 
 @Repository
-public interface GeneroProducaoRepository extends CrudRepository<Long, GeneroProducao> {
+public interface GeneroMultimidiaRepository extends CrudRepository<GeneroProducao, Long> {
 
 }
