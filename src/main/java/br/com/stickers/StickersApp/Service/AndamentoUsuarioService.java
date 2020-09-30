@@ -5,7 +5,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.stickers.StickersApp.DTO.AndamentoUsuarioDTO;
 import br.com.stickers.StickersApp.Model.AndamentoUsuario;
+import br.com.stickers.StickersApp.Model.Multimidia;
 import br.com.stickers.StickersApp.Repository.AndamentoUsuarioRepository;
 
 @Service
@@ -29,15 +31,16 @@ public class AndamentoUsuarioService {
 		return andamentoUsuario;
 	}
 	
-	public AndamentoUsuario updateAndamentoUsuario (Long andamentoUsuarioId, Integer epAssistidos, Integer epTotal) {
+	public AndamentoUsuario updateAndamentoUsuario (AndamentoUsuarioDTO andamentoUsuarioDTO) {
 		
-		AndamentoUsuario andamentoUsuario = andamentoUsuarioRepository.findAndamentoUsuarioById(andamentoUsuarioId);
+		AndamentoUsuario andamentoUsuario = andamentoUsuarioRepository.findAndamentoUsuarioById(andamentoUsuarioDTO.getAndamentoUsuarioId());
+		Multimidia multimidia = andamentoUsuario.getMultimidia();
 		
 		if (andamentoUsuario != null) {
 			
-			andamentoUsuario.setEpAssistidos(epAssistidos);
+			andamentoUsuario.setEpAssistidos(andamentoUsuarioDTO.getEpAssistidos());
 			
-			if (epAssistidos.equals(epTotal)) {
+			if (andamentoUsuarioDTO.getEpAssistidos().equals(multimidia.getEpTotal())) {
 				
 				andamentoUsuario.setStickerOK(true);
 			}

@@ -6,12 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.stickers.StickersApp.DTO.AndamentoUsuarioDTO;
 import br.com.stickers.StickersApp.Model.AndamentoUsuario;
 import br.com.stickers.StickersApp.Service.AndamentoUsuarioService;
 
@@ -50,10 +51,10 @@ public class AndamentoUsuarioController {
 		return ResponseEntity.notFound().build();				
 	}
 	
-	@PatchMapping(path = "/{id}", produces = "application/json")
-	public ResponseEntity<AndamentoUsuario> updateAndamentoUsuario(@RequestBody Long andamentoUsuarioId, Integer epAssistidos, Integer epTotal) {
+	@PostMapping(path = "/{id}", produces = "application/json")
+	public ResponseEntity<AndamentoUsuario> updateAndamentoUsuario(@RequestBody AndamentoUsuarioDTO andamentoUsuarioDTO) {
 		
-		AndamentoUsuario response = andamentoUsuarioService.updateAndamentoUsuario(andamentoUsuarioId, epAssistidos, epTotal);
+		AndamentoUsuario response = andamentoUsuarioService.updateAndamentoUsuario(andamentoUsuarioDTO);
 		
 		if (response != null) {
 			
