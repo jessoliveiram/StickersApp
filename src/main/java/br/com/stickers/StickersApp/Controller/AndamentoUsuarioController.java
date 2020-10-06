@@ -36,6 +36,20 @@ public class AndamentoUsuarioController {
 		
 		return ResponseEntity.notFound().build();
 	}
+	@GetMapping(path="/finalizados", produces = "application/json")
+	public ResponseEntity<ArrayList<AndamentoUsuario>> getListAndamentoUsuarioCompleto() {
+		
+		ArrayList<AndamentoUsuario> response = (ArrayList<AndamentoUsuario>) andamentoUsuarioService.getListAndamentoUsuarioCompleto();
+		
+		if (response != null) {
+			
+			return ResponseEntity.ok().body(response);
+			
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
 	
 	@GetMapping(path = "/{id}", produces = "application/json")
 	public ResponseEntity<Optional<AndamentoUsuario>> getAndamentoUsuarioById(@PathVariable Long id) {

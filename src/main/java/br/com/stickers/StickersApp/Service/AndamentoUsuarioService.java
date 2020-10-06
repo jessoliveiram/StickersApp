@@ -1,5 +1,6 @@
 package br.com.stickers.StickersApp.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,17 @@ public class AndamentoUsuarioService {
 		}
 		
 		return andamentoUsuario;
+	}
+	
+	public ArrayList<AndamentoUsuario> getListAndamentoUsuarioCompleto() {
+		
+		ArrayList<AndamentoUsuario> completos = new ArrayList<AndamentoUsuario>();
+		for (AndamentoUsuario andamento : getListAndamentoUsuario()) {
+			if (andamento.getEpAssistidos().equals(andamento.getMultimidia().getEpTotal())) {
+				completos.add(andamento);
+			}
+		}
+		return completos;
 	}
 
 }
