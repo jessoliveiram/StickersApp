@@ -1,0 +1,15 @@
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/Repository/AndamentoUsuarioRepository.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/Repository/GeneroMultimidiaRepository.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/Model/Multimidia.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/Controller/AndamentoUsuarioController.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/Model/GeneroMultimidia.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/Repository/MultimidiaRepository.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/Model/TipoMultimidia.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/Repository/UsuarioRepository.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/Service/UsuarioService.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/Model/AndamentoUsuario.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/Service/AndamentoUsuarioService.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/Repository/TipoMultimidiaRepository.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/StickersAppApplication.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/DTO/AndamentoUsuarioDTO.java
+/home/jessica/pessoais/stickers/StickersApp/src/main/java/br/com/stickers/StickersApp/Model/Usuario.java

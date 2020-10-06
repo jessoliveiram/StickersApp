@@ -15,7 +15,7 @@ public class TipoMultimidia {
 	
 	@Id
 	@GeneratedValue
-	private Long tipoMultimidia_id;
+	private Long id;
 	
 	private String nome;
 	

@@ -11,11 +11,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class GeneroProducao {
+public class GeneroMultimidia {
 	
 	@Id
 	@GeneratedValue
-	private Long generoProducao_id;
+	private Long id;
 	
 	private String nome;
 	
