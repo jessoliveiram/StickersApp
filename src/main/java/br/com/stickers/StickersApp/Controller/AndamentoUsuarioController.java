@@ -1,13 +1,13 @@
 package br.com.stickers.StickersApp.Controller;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,23 +23,10 @@ public class AndamentoUsuarioController {
 	@Autowired
 	private AndamentoUsuarioService andamentoUsuarioService;
 	
-	@GetMapping(produces = "application/json")
-	public ResponseEntity<ArrayList<AndamentoUsuario>> getListAndamentoUsuario() {
+	@GetMapping(path = "/list/{id}", produces = "application/json")
+	public ResponseEntity<List<AndamentoUsuario>> getListAndamentoUsuario(@PathVariable Long id) {
 		
-		ArrayList<AndamentoUsuario> response = (ArrayList<AndamentoUsuario>) andamentoUsuarioService.getListAndamentoUsuario();
-		
-		if (response != null) {
-			
-			return ResponseEntity.ok().body(response);
-			
-		}
-		
-		return ResponseEntity.notFound().build();
-	}
-	@GetMapping(path="/finalizados", produces = "application/json")
-	public ResponseEntity<ArrayList<AndamentoUsuario>> getListAndamentoUsuarioCompleto() {
-		
-		ArrayList<AndamentoUsuario> response = (ArrayList<AndamentoUsuario>) andamentoUsuarioService.getListAndamentoUsuarioCompleto();
+		List<AndamentoUsuario> response = andamentoUsuarioService.getListAndamentoUsuarioByUsuario(id);
 		
 		if (response != null) {
 			
@@ -50,13 +37,40 @@ public class AndamentoUsuarioController {
 		return ResponseEntity.notFound().build();
 	}
 	
+	@GetMapping(path="/finalizados/{id}", produces = "application/json")
+	public ResponseEntity<List<AndamentoUsuario>> getListAndamentoUsuarioCompleto(@PathVariable Long id) {
+		
+		List<AndamentoUsuario> response = andamentoUsuarioService.getListAndamentoUsuarioCompletoByUsuario(id);
+		
+		if (response != null) {
+			
+			return ResponseEntity.ok().body(response);
+			
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@PutMapping(path="/{id}", produces = "application/json")
+	public ResponseEntity<List<AndamentoUsuario>> updateListAndamentoUsuario(@PathVariable Long id, @RequestBody AndamentoUsuarioDTO andamentoUsuarioDTO) {
+		
+		List<AndamentoUsuario> response = andamentoUsuarioService.updateListAndamentoUsuario(id, andamentoUsuarioDTO);
+		
+		if (response != null) {
+			
+			return ResponseEntity.ok().body(response);
+			
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
 	
 	@GetMapping(path = "/{id}", produces = "application/json")
-	public ResponseEntity<Optional<AndamentoUsuario>> getAndamentoUsuarioById(@PathVariable Long id) {
+	public ResponseEntity<AndamentoUsuario> getAndamentoUsuarioById(@PathVariable Long id) {
 		
-		Optional<AndamentoUsuario> response = andamentoUsuarioService.getAndamentoUsuarioById(id);
+		AndamentoUsuario response = andamentoUsuarioService.getAndamentoUsuarioById(id);
 		
-		if (response.isPresent()) {
+		if (response != null) {
 			
 			return ResponseEntity.ok().body(response);
 			
