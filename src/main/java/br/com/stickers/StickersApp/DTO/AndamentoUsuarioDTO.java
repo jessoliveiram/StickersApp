@@ -10,6 +10,9 @@ public class AndamentoUsuarioDTO {
 	private Long andamentoUsuarioId;
 	
 	private Integer epAssistidos;
+	
+	private Long multimidiaId;
 
+	private String acaoMultimidia;
 
 }
