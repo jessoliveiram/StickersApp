@@ -27,7 +27,13 @@ public class UsuarioController {
 		
 		Usuario response = usuarioService.getUsuario(id);
 		
-		return ResponseEntity.ok().body(response);
+		if (response != null) {
+			
+			return ResponseEntity.ok().body(response);
+			
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 	
 	@PutMapping(path = "/{id}", produces = "application/json")
@@ -35,7 +41,13 @@ public class UsuarioController {
 		
 		Usuario response = usuarioService.updateUsuario(id, usuarioDTO);
 		
-		return ResponseEntity.ok().body(response);
+		if (response != null) {
+			
+			return ResponseEntity.ok().body(response);
+			
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 	
 	@GetMapping(produces = "application/json")
@@ -43,7 +55,13 @@ public class UsuarioController {
 		
 		List<Usuario> response = usuarioService.getListUsuario();
 		
-		return ResponseEntity.ok().body(response);
+		if (response != null) {
+			
+			return ResponseEntity.ok().body(response);
+			
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 
 }
