@@ -13,6 +13,6 @@ public class AndamentoUsuarioDTO {
 	
 	private Long multimidiaId;
 
-	private String acaoMultimidia;
+	private String acao;
 
 }
