@@ -1,12 +1,11 @@
 package br.com.stickers.StickersApp.Model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
-import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +16,7 @@ import lombok.Setter;
 public class Usuario {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue 
 	private Long id;
 	
 	private String nome;
@@ -28,12 +27,10 @@ public class Usuario {
 	
 	private String pais;
 	
-	@OneToMany
-	@JoinColumn(name = "id")
+	@OneToMany(mappedBy = "usuario")
 	private List<AndamentoUsuario> listAndamentoUsuario;
 	
-	@OneToMany
-	@JoinColumn(name = "id")
-	private List<Multimidia> listFavoritos;
+	@OneToMany(mappedBy = "usuario")
+	private List<Favorito> listFavoritos;
 	
 }

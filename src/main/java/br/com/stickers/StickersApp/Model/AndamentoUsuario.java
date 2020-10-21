@@ -3,7 +3,7 @@ package br.com.stickers.StickersApp.Model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import lombok.Getter;
@@ -19,8 +19,10 @@ public class AndamentoUsuario {
 	private Long id;
 
 	@OneToOne
-	@JoinColumn(name = "id")
 	private Multimidia multimidia;
+	
+	@ManyToOne
+	private Usuario usuario;
 	
 	private Integer epAssistidos;
 
