@@ -24,7 +24,7 @@ public class AndamentoUsuarioController {
 	private AndamentoUsuarioService andamentoUsuarioService;
 	
 	@GetMapping(path = "/list/{id}", produces = "application/json")
-	public ResponseEntity<List<AndamentoUsuario>> getListAndamentoUsuario(@PathVariable Long id) {
+	public ResponseEntity<List<AndamentoUsuario>> getListAndamentoUsuarioByUsuario(@PathVariable Long id) {
 		
 		List<AndamentoUsuario> response = andamentoUsuarioService.getListAndamentoUsuarioByUsuario(id);
 		
@@ -38,23 +38,9 @@ public class AndamentoUsuarioController {
 	}
 	
 	@GetMapping(path="/finalizados/{id}", produces = "application/json")
-	public ResponseEntity<List<AndamentoUsuario>> getListAndamentoUsuarioCompleto(@PathVariable Long id) {
+	public ResponseEntity<List<AndamentoUsuario>> getListAndamentoUsuarioCompletoByUsuario(@PathVariable Long id) {
 		
 		List<AndamentoUsuario> response = andamentoUsuarioService.getListAndamentoUsuarioCompletoByUsuario(id);
-		
-		if (response != null) {
-			
-			return ResponseEntity.ok().body(response);
-			
-		}
-		
-		return ResponseEntity.notFound().build();
-	}
-	
-	@PutMapping(path="/{id}", produces = "application/json")
-	public ResponseEntity<List<AndamentoUsuario>> updateListAndamentoUsuario(@PathVariable Long id, @RequestBody AndamentoUsuarioDTO andamentoUsuarioDTO) {
-		
-		List<AndamentoUsuario> response = andamentoUsuarioService.updateListAndamentoUsuario(id, andamentoUsuarioDTO);
 		
 		if (response != null) {
 			
@@ -79,10 +65,24 @@ public class AndamentoUsuarioController {
 		return ResponseEntity.notFound().build();				
 	}
 	
-	@PostMapping(path = "/{id}", produces = "application/json")
-	public ResponseEntity<AndamentoUsuario> updateAndamentoUsuario(@RequestBody AndamentoUsuarioDTO andamentoUsuarioDTO) {
+	@PostMapping(path="/{id}", produces = "application/json")
+	public ResponseEntity<List<AndamentoUsuario>> updateListAndamentoUsuario(@PathVariable Long id, @RequestBody AndamentoUsuarioDTO andamentoUsuarioDTO) {
 		
-		AndamentoUsuario response = andamentoUsuarioService.updateAndamentoUsuario(andamentoUsuarioDTO);
+		Boolean response = andamentoUsuarioService.updateListAndamentoUsuario(id, andamentoUsuarioDTO);
+		
+		if (response == true) {
+			
+			return ResponseEntity.ok().build();
+			
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@PutMapping(path = "/{id}", produces = "application/json")
+	public ResponseEntity<AndamentoUsuario> updateEpisodios(@RequestBody AndamentoUsuarioDTO andamentoUsuarioDTO) {
+		
+		AndamentoUsuario response = andamentoUsuarioService.updateEpisodios(andamentoUsuarioDTO);
 		
 		if (response != null) {
 			
