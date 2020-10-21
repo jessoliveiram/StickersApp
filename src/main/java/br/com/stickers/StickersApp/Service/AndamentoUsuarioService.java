@@ -46,37 +46,6 @@ public class AndamentoUsuarioService {
 		return completos;
 	}
 	
-	public List<AndamentoUsuario> updateListAndamentoUsuario(Long usuarioId, AndamentoUsuarioDTO andamentoUsuarioDTO) {
-		
-		if (andamentoUsuarioDTO.getAcaoMultimidia() == "add") {
-			
-			Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
-			Multimidia multimidia = multimidiaRepository.findMultimidiaById(andamentoUsuarioDTO.getMultimidiaId());
-			
-			List<AndamentoUsuario> listAndamentoUsuario = usuario.getListAndamentoUsuario();
-			
-			AndamentoUsuario newAndamentoUsuario = new AndamentoUsuario();
-			newAndamentoUsuario.setMultimidia(multimidia);
-			listAndamentoUsuario.add(newAndamentoUsuario);
-			
-			return (List<AndamentoUsuario>) andamentoUsuarioRepository.saveAll(listAndamentoUsuario);
-		}
-		
-		else if (andamentoUsuarioDTO.getAcaoMultimidia() == "remove") {
-			
-			Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
-			AndamentoUsuario andamentoUsuario = andamentoUsuarioRepository.findAndamentoUsuarioById(andamentoUsuarioDTO.getAndamentoUsuarioId());
-			
-			List<AndamentoUsuario> listAndamentoUsuario = usuario.getListAndamentoUsuario();
-			
-			listAndamentoUsuario.remove(andamentoUsuario);
-			
-			return (List<AndamentoUsuario>) andamentoUsuarioRepository.saveAll(listAndamentoUsuario);
-			
-		}
-		return null;
-	}
-	
 	public AndamentoUsuario getAndamentoUsuarioById (Long id) {
 		
 		AndamentoUsuario andamentoUsuario = andamentoUsuarioRepository.findAndamentoUsuarioById(id);
@@ -85,7 +54,32 @@ public class AndamentoUsuarioService {
 		
 	}
 	
-	public AndamentoUsuario updateAndamentoUsuario (AndamentoUsuarioDTO andamentoUsuarioDTO) {
+	public Boolean updateListAndamentoUsuario(Long usuarioId, AndamentoUsuarioDTO andamentoUsuarioDTO) {
+		
+		if (andamentoUsuarioDTO.getAcao() == "ADD") {
+			
+			Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
+			Multimidia multimidia = multimidiaRepository.findMultimidiaById(andamentoUsuarioDTO.getMultimidiaId());
+			
+			AndamentoUsuario andamentoUsuario = new AndamentoUsuario();
+			andamentoUsuario.setUsuario(usuario);
+			andamentoUsuario.setMultimidia(multimidia);
+			andamentoUsuario.setEpAssistidos(andamentoUsuarioDTO.getEpAssistidos());
+			andamentoUsuarioRepository.save(andamentoUsuario);
+			
+			return true;
+		}
+		
+		else if (andamentoUsuarioDTO.getAcao() == "REM") {
+			
+			usuarioRepository.deleteById(andamentoUsuarioDTO.getAndamentoUsuarioId());
+			
+			return true;
+		}
+		return false;
+	}
+	
+	public AndamentoUsuario updateEpisodios (AndamentoUsuarioDTO andamentoUsuarioDTO) {
 		
 		AndamentoUsuario andamentoUsuario = andamentoUsuarioRepository.findAndamentoUsuarioById(andamentoUsuarioDTO.getAndamentoUsuarioId());
 		Multimidia multimidia = andamentoUsuario.getMultimidia();
