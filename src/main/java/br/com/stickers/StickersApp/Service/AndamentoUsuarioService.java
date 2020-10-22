@@ -27,7 +27,7 @@ public class AndamentoUsuarioService {
 	private MultimidiaRepository multimidiaRepository;
 
 	
-	public List<AndamentoUsuario> getListAndamentoUsuarioByUsuario (Long usuarioId) {
+	public List<AndamentoUsuario> getListAndamentoUsuario (Long usuarioId) {
 		
 		Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
 		List<AndamentoUsuario> listAndamentoUsuario = usuario.getListAndamentoUsuario();
@@ -35,10 +35,10 @@ public class AndamentoUsuarioService {
 		return listAndamentoUsuario;
 	}
 	
-	public List<AndamentoUsuario> getListAndamentoUsuarioCompletoByUsuario(Long usuarioId) {
+	public List<AndamentoUsuario> getListAndamentoUsuarioCompleto(Long usuarioId) {
 		
 		ArrayList<AndamentoUsuario> completos = new ArrayList<AndamentoUsuario>();
-		for (AndamentoUsuario andamento : getListAndamentoUsuarioByUsuario(usuarioId)) {
+		for (AndamentoUsuario andamento : getListAndamentoUsuario(usuarioId)) {
 			if (andamento.getEpAssistidos().equals(andamento.getMultimidia().getEpTotal())) {
 				completos.add(andamento);
 			}
@@ -54,29 +54,31 @@ public class AndamentoUsuarioService {
 		
 	}
 	
-	public Boolean updateListAndamentoUsuario(Long usuarioId, AndamentoUsuarioDTO andamentoUsuarioDTO) {
+	public Boolean postAndamentoUsuario(Long usuarioId, AndamentoUsuarioDTO andamentoUsuarioDTO) {
+			
+		Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
+		Multimidia multimidia = multimidiaRepository.findMultimidiaById(andamentoUsuarioDTO.getMultimidiaId());
 		
-		if (andamentoUsuarioDTO.getAcao() == "ADD") {
-			
-			Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
-			Multimidia multimidia = multimidiaRepository.findMultimidiaById(andamentoUsuarioDTO.getMultimidiaId());
-			
-			AndamentoUsuario andamentoUsuario = new AndamentoUsuario();
-			andamentoUsuario.setUsuario(usuario);
-			andamentoUsuario.setMultimidia(multimidia);
-			andamentoUsuario.setEpAssistidos(andamentoUsuarioDTO.getEpAssistidos());
+		AndamentoUsuario andamentoUsuario = new AndamentoUsuario();
+		andamentoUsuario.setUsuario(usuario);
+		andamentoUsuario.setMultimidia(multimidia);
+		andamentoUsuario.setEpAssistidos(andamentoUsuarioDTO.getEpAssistidos());
+		try {
 			andamentoUsuarioRepository.save(andamentoUsuario);
-			
 			return true;
+		} catch (Exception e) {
+			return false;
 		}
+	}
 		
-		else if (andamentoUsuarioDTO.getAcao() == "REM") {
+	public Boolean deleteAndamentoUsuario(Long usuarioId, AndamentoUsuarioDTO andamentoUsuarioDTO) {
 			
-			usuarioRepository.deleteById(andamentoUsuarioDTO.getAndamentoUsuarioId());
-			
+		try {
+			andamentoUsuarioRepository.deleteById(andamentoUsuarioDTO.getAndamentoUsuarioId());
 			return true;
+		} catch (Exception e) {
+			return false;
 		}
-		return false;
 	}
 	
 	public AndamentoUsuario updateEpisodios (AndamentoUsuarioDTO andamentoUsuarioDTO) {
