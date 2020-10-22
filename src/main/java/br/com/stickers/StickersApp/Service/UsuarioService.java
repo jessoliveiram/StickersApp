@@ -29,9 +29,11 @@ public class UsuarioService {
 		ModelMapper mm = new ModelMapper();
 		Usuario usuario = mm.map(usuarioDTO, Usuario.class);
 		usuario.setId(id);
-		
-		return usuario;
-		
+		try {
+			return usuarioRepository.save(usuario);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 	public List<Usuario> getListUsuario() {
