@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +25,9 @@ public class AndamentoUsuarioController {
 	private AndamentoUsuarioService andamentoUsuarioService;
 	
 	@GetMapping(path = "/list/{id}", produces = "application/json")
-	public ResponseEntity<List<AndamentoUsuario>> getListAndamentoUsuarioByUsuario(@PathVariable Long id) {
+	public ResponseEntity<List<AndamentoUsuario>> getListAndamentoUsuario(@PathVariable Long id) {
 		
-		List<AndamentoUsuario> response = andamentoUsuarioService.getListAndamentoUsuarioByUsuario(id);
+		List<AndamentoUsuario> response = andamentoUsuarioService.getListAndamentoUsuario(id);
 		
 		if (response != null) {
 			
@@ -38,9 +39,9 @@ public class AndamentoUsuarioController {
 	}
 	
 	@GetMapping(path="/finalizados/{id}", produces = "application/json")
-	public ResponseEntity<List<AndamentoUsuario>> getListAndamentoUsuarioCompletoByUsuario(@PathVariable Long id) {
+	public ResponseEntity<List<AndamentoUsuario>> getListAndamentoUsuarioCompleto(@PathVariable Long id) {
 		
-		List<AndamentoUsuario> response = andamentoUsuarioService.getListAndamentoUsuarioCompletoByUsuario(id);
+		List<AndamentoUsuario> response = andamentoUsuarioService.getListAndamentoUsuarioCompleto(id);
 		
 		if (response != null) {
 			
@@ -66,9 +67,23 @@ public class AndamentoUsuarioController {
 	}
 	
 	@PostMapping(path="/{id}", produces = "application/json")
-	public ResponseEntity<List<AndamentoUsuario>> updateListAndamentoUsuario(@PathVariable Long id, @RequestBody AndamentoUsuarioDTO andamentoUsuarioDTO) {
+	public ResponseEntity<List<AndamentoUsuario>> postAndamentoUsuario(@PathVariable Long id, @RequestBody AndamentoUsuarioDTO andamentoUsuarioDTO) {
 		
-		Boolean response = andamentoUsuarioService.updateListAndamentoUsuario(id, andamentoUsuarioDTO);
+		Boolean response = andamentoUsuarioService.postAndamentoUsuario(id, andamentoUsuarioDTO);
+		
+		if (response == true) {
+			
+			return ResponseEntity.ok().build();
+			
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@DeleteMapping(path="/{id}", produces = "application/json")
+	public ResponseEntity<List<AndamentoUsuario>> deleteAndamentoUsuario(@PathVariable Long id, @RequestBody AndamentoUsuarioDTO andamentoUsuarioDTO) {
+		
+		Boolean response = andamentoUsuarioService.deleteAndamentoUsuario(id, andamentoUsuarioDTO);
 		
 		if (response == true) {
 			
