@@ -1,7 +1,7 @@
 package br.com.stickers.StickersApp.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,12 +37,10 @@ public class AndamentoUsuarioService {
 	
 	public List<AndamentoUsuario> getListAndamentoUsuarioCompleto(Long usuarioId) {
 		
-		ArrayList<AndamentoUsuario> completos = new ArrayList<AndamentoUsuario>();
-		for (AndamentoUsuario andamento : getListAndamentoUsuario(usuarioId)) {
-			if (andamento.getEpAssistidos().equals(andamento.getMultimidia().getEpTotal())) {
-				completos.add(andamento);
-			}
-		}
+		List<AndamentoUsuario> completos = getListAndamentoUsuario(usuarioId)
+				                                .stream().filter(au -> au.getStickerOK().equals(true))
+				                                .collect(Collectors.toList());
+
 		return completos;
 	}
 	
