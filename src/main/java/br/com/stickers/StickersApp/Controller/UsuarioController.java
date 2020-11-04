@@ -36,6 +36,20 @@ public class UsuarioController {
 		return ResponseEntity.notFound().build();
 	}
 	
+	@GetMapping(produces = "application/json")
+	public ResponseEntity<List<Usuario>> getListUsuario() {
+		
+		List<Usuario> response = usuarioService.getListUsuario();
+		
+		if (response != null) {
+			
+			return ResponseEntity.ok().body(response);
+			
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
 	@PutMapping(path = "/{id}", produces = "application/json")
 	public ResponseEntity<Usuario> updateUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
 		
@@ -50,18 +64,5 @@ public class UsuarioController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@GetMapping(produces = "application/json")
-	public ResponseEntity<List<Usuario>> getListUsuario() {
-		
-		List<Usuario> response = usuarioService.getListUsuario();
-		
-		if (response != null) {
-			
-			return ResponseEntity.ok().body(response);
-			
-		}
-		
-		return ResponseEntity.notFound().build();
-	}
 
 }

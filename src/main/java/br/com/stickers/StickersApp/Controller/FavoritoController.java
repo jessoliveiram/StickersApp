@@ -51,10 +51,10 @@ public class FavoritoController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@DeleteMapping(path = "/{id}", produces = "application/json")
-	public ResponseEntity<?> removeFavorito(@PathVariable Long id, @RequestBody FavoritoDTO favoritoDTO) {
+	@PostMapping(path = "/{id}", produces = "application/json")
+	public ResponseEntity<?> postFavorito(@PathVariable Long id, @RequestBody FavoritoDTO favoritoDTO) {
 		
-		Boolean response = favoritoService.deleteFavorito(id, favoritoDTO);
+		Boolean response = favoritoService.postFavorito(id, favoritoDTO);
 		
 		if (response == true) {
 			
@@ -65,10 +65,10 @@ public class FavoritoController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping(path = "/{id}", produces = "application/json")
-	public ResponseEntity<?> postFavorito(@PathVariable Long id, @RequestBody FavoritoDTO favoritoDTO) {
+	@DeleteMapping(path = "/{id}", produces = "application/json")
+	public ResponseEntity<?> deleteFavorito(@PathVariable Long id, @RequestBody FavoritoDTO favoritoDTO) {
 		
-		Boolean response = favoritoService.postFavorito(id, favoritoDTO);
+		Boolean response = favoritoService.deleteFavorito(id, favoritoDTO);
 		
 		if (response == true) {
 			
