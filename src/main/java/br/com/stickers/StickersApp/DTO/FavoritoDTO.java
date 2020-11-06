@@ -7,10 +7,8 @@ import lombok.Setter;
 @Setter
 public class FavoritoDTO {
 	
-	private String acao;
-	
 	private Long multimidiaId;
 	
-	private Long favoritoId;
+	private Long usuarioId;
 
 }

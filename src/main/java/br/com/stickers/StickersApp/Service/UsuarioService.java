@@ -17,23 +17,11 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 
 	
-	public Usuario getUsuario(Long id) {
+	public Usuario getUsuario(Long usuarioId) {
 		
-		Usuario usuario = usuarioRepository.findUsuarioById(id);
+		Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
 		
 		return usuario;
-	}
-	
-	public Usuario updateUsuario(Long id, UsuarioDTO usuarioDTO) {
-		
-		ModelMapper mm = new ModelMapper();
-		Usuario usuario = mm.map(usuarioDTO, Usuario.class);
-		usuario.setId(id);
-		try {
-			return usuarioRepository.save(usuario);
-		} catch (Exception e) {
-			return null;
-		}
 	}
 	
 	public List<Usuario> getListUsuario() {
@@ -41,6 +29,40 @@ public class UsuarioService {
 		List<Usuario> usuarios = (List<Usuario>) usuarioRepository.findAll();
 		
 		return usuarios;
+	}
+	
+	public Usuario createUsuario(UsuarioDTO usuarioDTO) {
+		
+		ModelMapper mm = new ModelMapper();
+		Usuario usuario = mm.map(usuarioDTO, Usuario.class);
+		try {
+			return usuarioRepository.save(usuario);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public Boolean updateUsuario(Long usuarioId, UsuarioDTO usuarioDTO) {
+		
+		Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
+		ModelMapper mm = new ModelMapper();
+		mm.map(usuarioDTO, usuario);
+		try {
+			usuarioRepository.save(usuario);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public Boolean deleteUsuario(Long usuarioId) {
+		
+		try {
+			usuarioRepository.deleteById(usuarioId);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

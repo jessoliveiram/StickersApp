@@ -65,24 +65,25 @@ public class MultimidiaController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@DeleteMapping(path = "/{id}", produces = "application/json")
-	public ResponseEntity<Boolean> deleteMultimidia(@PathVariable Long multimidiaId) {
+	@PostMapping(produces = "application/json")
+	public ResponseEntity<Multimidia> createMultimidia(@RequestBody MultimidiaDTO multimidiaDTO) {
 		
-		Boolean response = multimidiaService.deleteMultimidia(multimidiaId);
+		Multimidia response = multimidiaService.createMultimidia(multimidiaDTO);
 		
-		if (response == true) {
+		if (response != null) {
 			
-			return ResponseEntity.ok().build();
+			return ResponseEntity.ok().body(response);
 			
 		}
 		
 		return ResponseEntity.notFound().build();
+		
 	}
 	
-	@PostMapping(produces = "application/json")
-	public ResponseEntity<Boolean> postMultimidia(@RequestBody MultimidiaDTO multimidiaDTO) {
+	@DeleteMapping(path = "/{id}", produces = "application/json")
+	public ResponseEntity<Boolean> deleteMultimidia(@PathVariable Long id) {
 		
-		Boolean response = multimidiaService.postMultimidia(multimidiaDTO);
+		Boolean response = multimidiaService.deleteMultimidia(id);
 		
 		if (response == true) {
 			
@@ -91,7 +92,6 @@ public class MultimidiaController {
 		}
 		
 		return ResponseEntity.notFound().build();
-		
 	}
 
 }

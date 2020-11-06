@@ -24,15 +24,28 @@ public class AndamentoUsuarioController {
 	@Autowired
 	private AndamentoUsuarioService andamentoUsuarioService;
 	
-	@GetMapping(path = "/list/{id}", produces = "application/json")
-	public ResponseEntity<List<AndamentoUsuario>> getListAndamentoUsuario(@PathVariable Long id) {
+	
+	@GetMapping(path = "/{id}", produces = "application/json")
+	public ResponseEntity<AndamentoUsuario> getAndamentoUsuarioById(@PathVariable Long id) {
 		
-		List<AndamentoUsuario> response = andamentoUsuarioService.getListAndamentoUsuario(id);
+		AndamentoUsuario response = andamentoUsuarioService.getAndamentoUsuario(id);
 		
 		if (response != null) {
 			
 			return ResponseEntity.ok().body(response);
+		}
+		
+		return ResponseEntity.notFound().build();				
+	}
+	
+	@GetMapping(path = "/list/{id}", produces = "application/json")
+	public ResponseEntity<List<AndamentoUsuario>> getListAndamentoUsuario(@PathVariable Long id) {
+		
+		List<AndamentoUsuario> response = andamentoUsuarioService.getListAndamentoUsuarioByUsuario(id);
+		
+		if (response != null) {
 			
+			return ResponseEntity.ok().body(response);
 		}
 		
 		return ResponseEntity.notFound().build();
@@ -46,49 +59,32 @@ public class AndamentoUsuarioController {
 		if (response != null) {
 			
 			return ResponseEntity.ok().body(response);
-			
 		}
 		
 		return ResponseEntity.notFound().build();
 	}
 	
-	@GetMapping(path = "/{id}", produces = "application/json")
-	public ResponseEntity<AndamentoUsuario> getAndamentoUsuarioById(@PathVariable Long id) {
+	@PostMapping(path="/{id}", produces = "application/json")
+	public ResponseEntity<AndamentoUsuario> createAndamentoUsuario(@PathVariable Long id, @RequestBody AndamentoUsuarioDTO andamentoUsuarioDTO) {
 		
-		AndamentoUsuario response = andamentoUsuarioService.getAndamentoUsuarioById(id);
+		AndamentoUsuario response = andamentoUsuarioService.createAndamentoUsuario(id, andamentoUsuarioDTO);
 		
 		if (response != null) {
 			
 			return ResponseEntity.ok().body(response);
-			
-		}
-		
-		return ResponseEntity.notFound().build();				
-	}
-	
-	@PostMapping(path="/{id}", produces = "application/json")
-	public ResponseEntity<List<AndamentoUsuario>> postAndamentoUsuario(@PathVariable Long id, @RequestBody AndamentoUsuarioDTO andamentoUsuarioDTO) {
-		
-		Boolean response = andamentoUsuarioService.postAndamentoUsuario(id, andamentoUsuarioDTO);
-		
-		if (response == true) {
-			
-			return ResponseEntity.ok().build();
-			
 		}
 		
 		return ResponseEntity.notFound().build();
 	}
 	
 	@DeleteMapping(path="/{id}", produces = "application/json")
-	public ResponseEntity<List<AndamentoUsuario>> deleteAndamentoUsuario(@PathVariable Long id, @RequestBody AndamentoUsuarioDTO andamentoUsuarioDTO) {
+	public ResponseEntity<Boolean> deleteAndamentoUsuario(@PathVariable Long id) {
 		
-		Boolean response = andamentoUsuarioService.deleteAndamentoUsuario(id, andamentoUsuarioDTO);
+		Boolean response = andamentoUsuarioService.deleteAndamentoUsuario(id);
 		
 		if (response == true) {
 			
 			return ResponseEntity.ok().build();
-			
 		}
 		
 		return ResponseEntity.notFound().build();
@@ -102,7 +98,6 @@ public class AndamentoUsuarioController {
 		if (response != null) {
 			
 			return ResponseEntity.ok().body(response);
-			
 		}
 		
 		return ResponseEntity.notFound().build();

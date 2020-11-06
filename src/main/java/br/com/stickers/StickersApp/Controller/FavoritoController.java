@@ -23,19 +23,6 @@ public class FavoritoController {
 	@Autowired
 	private FavoritoService favoritoService;
 	
-	@GetMapping(path = "/list/{id}", produces = "application/json")
-	public ResponseEntity<List<Favorito>> getListFavoritos(@PathVariable Long id) {
-		
-		List<Favorito> response = favoritoService.getListFavoritos(id);
-		
-		if (response != null) {
-			
-			return ResponseEntity.ok().body(response);
-			
-		}
-		
-		return ResponseEntity.notFound().build();
-	}
 	
 	@GetMapping(path = "/{id}", produces = "application/json")
 	public ResponseEntity<Favorito> getFavorito(@PathVariable Long id) {
@@ -51,14 +38,28 @@ public class FavoritoController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping(path = "/{id}", produces = "application/json")
-	public ResponseEntity<?> postFavorito(@PathVariable Long id, @RequestBody FavoritoDTO favoritoDTO) {
+	@GetMapping(path = "/list/{id}", produces = "application/json")
+	public ResponseEntity<List<Favorito>> getListFavoritos(@PathVariable Long id) {
 		
-		Boolean response = favoritoService.postFavorito(id, favoritoDTO);
+		List<Favorito> response = favoritoService.getListFavoritos(id);
 		
-		if (response == true) {
+		if (response != null) {
 			
-			return ResponseEntity.ok().build();
+			return ResponseEntity.ok().body(response);
+			
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@PostMapping(produces = "application/json")
+	public ResponseEntity<?> createFavorito(@RequestBody FavoritoDTO favoritoDTO) {
+		
+		Favorito response = favoritoService.createFavorito(favoritoDTO);
+		
+		if (response != null) {
+			
+			return ResponseEntity.ok().body(response);
 			
 		}
 		
@@ -66,9 +67,9 @@ public class FavoritoController {
 	}
 	
 	@DeleteMapping(path = "/{id}", produces = "application/json")
-	public ResponseEntity<?> deleteFavorito(@PathVariable Long id, @RequestBody FavoritoDTO favoritoDTO) {
+	public ResponseEntity<?> deleteFavorito(@PathVariable Long id) {
 		
-		Boolean response = favoritoService.deleteFavorito(id, favoritoDTO);
+		Boolean response = favoritoService.deleteFavorito(id);
 		
 		if (response == true) {
 			

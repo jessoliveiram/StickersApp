@@ -26,6 +26,14 @@ public class FavoritoService {
 	private FavoritoRepository favoritoRepository;
 	
 	
+	public Favorito getFavorito(Long favoritoId) {
+		
+		Favorito favorito = favoritoRepository.findFavoritoById(favoritoId);
+		
+		return favorito;
+		
+	}
+	
 	public List<Favorito> getListFavoritos(Long usuarioId) {
 		
 		Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
@@ -35,36 +43,26 @@ public class FavoritoService {
 		return listFavoritos;
 		
 	}
-	
-	public Favorito getFavorito(Long favoritoId) {
-		
-		Favorito favorito = favoritoRepository.findFavoritoById(favoritoId);
-		
-		return favorito;
-		
-	}
 
-	public Boolean deleteFavorito(Long usuarioId, FavoritoDTO favoritoDTO) {
+	public Favorito createFavorito(FavoritoDTO favoritoDTO) {
 		
-		try {
-			favoritoRepository.deleteById(favoritoDTO.getFavoritoId());
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-		
-	}
-		
-	public Boolean postFavorito(Long usuarioId, FavoritoDTO favoritoDTO) {
-		
-		Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
+		Usuario usuario = usuarioRepository.findUsuarioById(favoritoDTO.getUsuarioId());
 		Multimidia multimidia = multimidiaRepository.findMultimidiaById(favoritoDTO.getMultimidiaId());
 		Favorito favorito = new Favorito();
 		favorito.setMultimidia(multimidia);
 		favorito.setUsuario(usuario);
 		
 		try {
-			favoritoRepository.save(favorito);
+			return favoritoRepository.save(favorito);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public Boolean deleteFavorito(Long favoritoId) {
+		
+		try {
+			favoritoRepository.deleteById(favoritoId);
 			return true;
 		} catch (Exception e) {
 			return false;

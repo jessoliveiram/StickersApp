@@ -41,6 +41,17 @@ public class MultimidiaService {
 		
 	}
 
+	public Multimidia createMultimidia(MultimidiaDTO multimidiaDTO) {
+		
+		ModelMapper mm = new ModelMapper();
+		Multimidia Multimidia = mm.map(multimidiaDTO, Multimidia.class);
+		try {
+			return multimidiaRepository.save(Multimidia);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 	public Boolean deleteMultimidia(Long multimidiaId) {
 		
 		try {
@@ -50,17 +61,5 @@ public class MultimidiaService {
 			return false;
 		}
 		
-	}
-		
-	public Boolean postMultimidia(MultimidiaDTO multimidiaDTO) {
-		
-		ModelMapper mm = new ModelMapper();
-		Multimidia Multimidia = mm.map(multimidiaDTO, Multimidia.class);
-		try {
-			multimidiaRepository.save(Multimidia);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
 	}
 }

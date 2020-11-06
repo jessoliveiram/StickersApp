@@ -26,8 +26,16 @@ public class AndamentoUsuarioService {
 	@Autowired
 	private MultimidiaRepository multimidiaRepository;
 
+
+	public AndamentoUsuario getAndamentoUsuario (Long id) {
+		
+		AndamentoUsuario andamentoUsuario = andamentoUsuarioRepository.findAndamentoUsuarioById(id);
+		
+		return andamentoUsuario;
+		
+	}
 	
-	public List<AndamentoUsuario> getListAndamentoUsuario (Long usuarioId) {
+	public List<AndamentoUsuario> getListAndamentoUsuarioByUsuario (Long usuarioId) {
 		
 		Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
 		List<AndamentoUsuario> listAndamentoUsuario = usuario.getListAndamentoUsuario();
@@ -37,22 +45,14 @@ public class AndamentoUsuarioService {
 	
 	public List<AndamentoUsuario> getListAndamentoUsuarioCompleto(Long usuarioId) {
 		
-		List<AndamentoUsuario> completos = getListAndamentoUsuario(usuarioId)
+		List<AndamentoUsuario> completos = getListAndamentoUsuarioByUsuario(usuarioId)
 				                                .stream().filter(au -> au.getStickerOK().equals(true))
 				                                .collect(Collectors.toList());
 
 		return completos;
 	}
 	
-	public AndamentoUsuario getAndamentoUsuarioById (Long id) {
-		
-		AndamentoUsuario andamentoUsuario = andamentoUsuarioRepository.findAndamentoUsuarioById(id);
-		
-		return andamentoUsuario;
-		
-	}
-	
-	public Boolean postAndamentoUsuario(Long usuarioId, AndamentoUsuarioDTO andamentoUsuarioDTO) {
+	public AndamentoUsuario createAndamentoUsuario(Long usuarioId, AndamentoUsuarioDTO andamentoUsuarioDTO) {
 			
 		Usuario usuario = usuarioRepository.findUsuarioById(usuarioId);
 		Multimidia multimidia = multimidiaRepository.findMultimidiaById(andamentoUsuarioDTO.getMultimidiaId());
@@ -62,17 +62,16 @@ public class AndamentoUsuarioService {
 		andamentoUsuario.setMultimidia(multimidia);
 		andamentoUsuario.setEpAssistidos(andamentoUsuarioDTO.getEpAssistidos());
 		try {
-			andamentoUsuarioRepository.save(andamentoUsuario);
-			return true;
+			return andamentoUsuarioRepository.save(andamentoUsuario);
 		} catch (Exception e) {
-			return false;
+			return null;
 		}
 	}
 		
-	public Boolean deleteAndamentoUsuario(Long usuarioId, AndamentoUsuarioDTO andamentoUsuarioDTO) {
+	public Boolean deleteAndamentoUsuario(Long andamentoUsuarioId) {
 			
 		try {
-			andamentoUsuarioRepository.deleteById(andamentoUsuarioDTO.getAndamentoUsuarioId());
+			andamentoUsuarioRepository.deleteById(andamentoUsuarioId);
 			return true;
 		} catch (Exception e) {
 			return false;
