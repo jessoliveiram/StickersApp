@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,9 +29,11 @@ public class Usuario {
 	
 	private String pais;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "usuario")
 	private List<AndamentoUsuario> listAndamentoUsuario;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "usuario")
 	private List<Favorito> listFavoritos;
 	
