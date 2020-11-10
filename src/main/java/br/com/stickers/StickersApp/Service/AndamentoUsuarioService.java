@@ -43,13 +43,20 @@ public class AndamentoUsuarioService {
 		return listAndamentoUsuario;
 	}
 	
-	public List<AndamentoUsuario> getListAndamentoUsuarioCompleto(Long usuarioId) {
+	public List<AndamentoUsuario> getListAndamentoUsuarioCompletoByUsuario(Long usuarioId) {
 		
 		List<AndamentoUsuario> completos = getListAndamentoUsuarioByUsuario(usuarioId)
 				                                .stream().filter(au -> au.getStickerOK().equals(true))
 				                                .collect(Collectors.toList());
 
 		return completos;
+	}
+	
+	public List<AndamentoUsuario> getListAndamentoUsuario() {
+		
+		List<AndamentoUsuario> listAndamentoUsuario = andamentoUsuarioRepository.findAll();
+
+		return listAndamentoUsuario;
 	}
 	
 	public AndamentoUsuario createAndamentoUsuario(Long usuarioId, AndamentoUsuarioDTO andamentoUsuarioDTO) {
@@ -78,9 +85,9 @@ public class AndamentoUsuarioService {
 		}
 	}
 	
-	public AndamentoUsuario updateEpisodios (AndamentoUsuarioDTO andamentoUsuarioDTO) {
+	public AndamentoUsuario updateEpisodios (Long andamentoUsuarioId, AndamentoUsuarioDTO andamentoUsuarioDTO) {
 		
-		AndamentoUsuario andamentoUsuario = andamentoUsuarioRepository.findAndamentoUsuarioById(andamentoUsuarioDTO.getAndamentoUsuarioId());
+		AndamentoUsuario andamentoUsuario = andamentoUsuarioRepository.findAndamentoUsuarioById(andamentoUsuarioId);
 		Multimidia multimidia = andamentoUsuario.getMultimidia();
 		
 		if (andamentoUsuario != null) {

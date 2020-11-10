@@ -7,12 +7,10 @@ import lombok.Setter;
 @Setter
 public class AndamentoUsuarioDTO {
 	
-	private Long andamentoUsuarioId;
-	
 	private Integer epAssistidos;
 	
 	private Long multimidiaId;
-
-	private String acao;
+	
+	private Long usuarioId;
 
 }
