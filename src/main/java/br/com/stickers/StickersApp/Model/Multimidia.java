@@ -19,11 +19,9 @@ public class Multimidia {
 	
 	private String nome;
 	
-	@OneToOne
-	private String tipoMultimidia;
+	private String tipo;
 	
-	@OneToOne
-	private String generoMultimidia;
+	private String genero;
 	
 	private Integer epTotal;
 	
