@@ -20,10 +20,10 @@ public class Multimidia {
 	private String nome;
 	
 	@OneToOne
-	private TipoMultimidia tipoMultimidia;
+	private String tipoMultimidia;
 	
 	@OneToOne
-	private GeneroMultimidia generoMultimidia;
+	private String generoMultimidia;
 	
 	private Integer epTotal;
 	
