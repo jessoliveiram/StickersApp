@@ -15,10 +15,10 @@ public interface MultimidiaRepository extends CrudRepository<Multimidia, Long> {
 	
 	public List<Multimidia> findAll();
 	
-	@Query(value="select m from Multimidia m join m.generoMultimidia gm where gm.codigo = :genero")
+	@Query(value="select m from Multimidia m where m.genero = :genero")
 	public List<Multimidia> findByGenero(String genero);
 	
-	@Query(value="select m from Multimidia m join m.tipoMultimidia tm where tm.codigo = :tipo")
+	@Query(value="select m from Multimidia m where m.tipo = :tipo")
 	public List<Multimidia> findByTipo(String tipo);
 	
 }
